@@ -7,6 +7,10 @@ module Spree
     preference :print_invoice_font_face, :string, :default => 'Helvetica'
     preference :print_buttons, :string, :default => 'invoice'
     preference :prawn_options, :hash, :default => {}
+    preference :print_invoice_footer_right1, :string, :default => 'Website:'
+    preference :print_invoice_footer_right2, :string, :default => 'http://www.google.com'
+    preference :print_invoice_footer_left1, :string, :default => 'Phone Number:'
+    preference :print_invoice_footer_left2, :string, :default => '+48-664-446-595'
 
     def use_sequential_number?
       print_invoice_next_number.present? && print_invoice_next_number > 0
