@@ -16,7 +16,7 @@ module Spree
 
     preference :print_invoice_logo_path => "logo.png"
 #    preference :print_invoice_next_number => 24
-    preference :prawn_options => {:page_layout => :portrait, :page_size => "A4", :margin => [50, 50, 50, 50]})
+    preference :prawn_options => {:page_layout => :portrait, :page_size => "A4", :margin => [50, 50, 50, 50]}
 
 
     def use_sequential_number?
