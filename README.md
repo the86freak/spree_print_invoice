@@ -31,6 +31,8 @@ config/initializers/spree.rb
     Spree::PrintInvoice::Config.set(:print_invoice_next_number => 24)
     Spree::PrintInvoice::Config.set(:prawn_options => {:page_layout => :portrait, :page_size => "A4", :margin => [50, 50, 50, 50]})
 
+The Logo must be in app/assets/images (NOT in public...)
+
 1. Set the logo path preference to include your store / company logo.
 
     Spree::PrintInvoice::Config.set(:print_invoice_logo_path => "/path/to/public/images/company-logo.png")
