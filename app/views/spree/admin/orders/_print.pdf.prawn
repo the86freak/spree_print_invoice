@@ -17,7 +17,7 @@ fill_color "000000"
 
 move_down 4
 
-if Spree::PrintInvoice::Config.use_sequential_number? && @order.invoice_number.present? && !@hide_prices
+#if Spree::PrintInvoice::Config.use_sequential_number? && @order.invoice_number.present? && !@hide_prices
 
   font @font_face,  :size => 9,  :style => :bold
   text "Rechnungsnummer: #{(@order.created_at.to_i - 1388534400).to_s}", :align => :right
@@ -27,17 +27,17 @@ if Spree::PrintInvoice::Config.use_sequential_number? && @order.invoice_number.p
   font @font_face, :size => 9
   text "Rechnungsdatum: #{I18n.l(@order.created_at, format:"%d.%m.%Y")}", :align => :right
 
-else
+#else
 
-  move_down 2
-  font @font_face,  :size => 9
-  text "#{Spree.t(:order_number, :number => @order.number)}", :align => :right
+#  move_down 2
+#  font @font_face,  :size => 9
+#  text "#{Spree.t(:order_number, :number => @order.number)}", :align => :right
 
-  move_down 2
-  font @font_face, :size => 9
-  text "#{I18n.l @order.completed_at.to_date}", :align => :right
+#  move_down 2
+#  font @font_face, :size => 9
+#  text "#{I18n.l @order.completed_at.to_date}", :align => :right
 
-end
+#end
 
 
 render :partial => "address"
