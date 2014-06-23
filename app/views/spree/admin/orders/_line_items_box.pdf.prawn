@@ -5,14 +5,14 @@ if @hide_prices
   @align = { 0 => :left, 1 => :left, 2 => :right, 3 => :right }
   data << [Spree.t(:sku), "Beschreibung", "Optionen", "Anzahl"]
 else
-  @column_widths = { 0 => 30, 1 => 60, 2 => 190, 3 => 40, 4 => 100, 5 => 60 }
+  @column_widths = { 0 => 30, 1 => 90, 2 => 160, 3 => 40, 4 => 100, 5 => 60 }
   @align = { 0 => :left, 1 => :left, 2 => :left, 3 => :right, 4 => :right, 5 => :right}
   data << [Spree.t(:sku), "Beschreibung", "Optionen", "Preis", "Anzahl", "Summe"]
 end
 
 @order.line_items.each do |item|
   row = [ item.variant.product.sku, item.variant.product.name]
-  row << 'item.variant.options_textaiofh söodhsödioug hs89 söohöo ashd laishud lasihd laisudhilasduh l ia oösdhasohd asoöhdasoöhdoöasidöasjdäasjod90a uöolkajmäf jodä p'
+  row << item.variant.options_text'
   row << item.single_display_amount.to_s unless @hide_prices
   row << item.quantity
   row << item.display_total.to_s unless @hide_prices
