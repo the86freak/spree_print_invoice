@@ -20,12 +20,12 @@ move_down 4
 if Spree::PrintInvoice::Config.use_sequential_number? && @order.invoice_number.present? && !@hide_prices
 
   font @font_face,  :size => 9,  :style => :bold
-  text "Rechnungsnummer #{@order.invoice_date}", :align => :right
+  text "Rechnungsnummer: #{(@order.created_at.to_i - 1388534400).to_s}", :align => :right
   move_down 2
-  text "Bestellnummer #{@order.number}", :align => :right
+  text "Bestellnummer: #{@order.number}", :align => :right
   move_down 2
   font @font_face, :size => 9
-  text "Rechnungsdatum #{I18n.l @order.invoice_date}", :align => :right
+  text "Rechnungsdatum: #{I18n.l(@order.created_at, format:"%d.%m.%Y")}", :align => :right
 
 else
 
@@ -46,7 +46,11 @@ move_down 30
 
 render :partial => "line_items_box"
 
-move_down 680
+move_down 480
+
+render :partial => "bye"
+
+move_down 660
 
 # Footer
 render :partial => "footer"

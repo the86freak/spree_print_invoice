@@ -13,19 +13,19 @@ def address_info(address)
   info += "#{address.address2}\n" if address.address2.present?
   state = address.state ? address.state.abbr : ""
   info += "#{address.zipcode} #{address.city} #{state}\n"
-  info += "#{address.country.name}\n"
-  info += "#{address.phone}\n"
   info.strip
 end
 
 
 data = [
-  [Spree.t(:billing_address), Spree.t(:shipping_address)], 
-  [address_info(bill_address), address_info(ship_address) + "\n\nvia #{@order.shipments.first.shipping_method.name}"]
+  ["Rechnungsadresse", "Lieferadresse"], 
+  [address_info(bill_address), address_info(ship_address)]
 ]
 
+#+ "\n\nvia #{@order.shipments.first.shipping_method.name}"
+
 move_down 75
-table(data, :width => 540) do
+table(data, :width => 480) do
   row(0).font_style = :bold
 
   # Billing address header

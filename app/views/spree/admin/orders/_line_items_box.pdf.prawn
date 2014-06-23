@@ -3,11 +3,11 @@ data = []
 if @hide_prices
   @column_widths = { 0 => 100, 1 => 165, 2 => 75, 3 => 75 }
   @align = { 0 => :left, 1 => :left, 2 => :right, 3 => :right }
-  data << [Spree.t(:sku), Spree.t(:item_description), Spree.t(:options), Spree.t(:qty)]
+  data << [Spree.t(:sku), "Beschreibung", "Optionen", "Anzahl"]
 else
-  @column_widths = { 0 => 75, 1 => 205, 2 => 75, 3 => 50, 4 => 75, 5 => 60 }
+  @column_widths = { 0 => 60, 1 => 200, 2 => 60, 3 => 40, 4 => 60, 5 => 60 }
   @align = { 0 => :left, 1 => :left, 2 => :left, 3 => :right, 4 => :right, 5 => :right}
-  data << [Spree.t(:sku), Spree.t(:item_description), Spree.t(:options), Spree.t(:price), Spree.t(:qty), Spree.t(:total)]
+  data << [Spree.t(:sku), "Beschreibung", "Optionen", "Preis", "Anzahl", "Summe"]
 end
 
 @order.line_items.each do |item|
@@ -24,7 +24,7 @@ extra_row_count = 0
 unless @hide_prices
   extra_row_count += 1
   data << [""] * 5
-  data << [nil, nil, nil, nil, Spree.t(:subtotal), @order.display_item_total.to_s]
+  data << [nil, nil, nil, nil, "Zwischensumme", @order.display_item_total.to_s]
 
   @order.all_adjustments.eligible.each do |adjustment|
     extra_row_count += 1
@@ -36,11 +36,11 @@ unless @hide_prices
     data << [nil, nil, nil, nil, shipment.shipping_method.name, shipment.display_cost.to_s]
   end
 
-  data << [nil, nil, nil, nil, Spree.t(:total), @order.display_total.to_s]
+  data << [nil, nil, nil, nil, "Summe", @order.display_total.to_s]
 end
 
 move_down(250)
-table(data, :width => 540) do
+table(data, :width => 480) do
   cells.border_width = 0.5
 
   row(0).borders = [:bottom]
