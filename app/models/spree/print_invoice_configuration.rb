@@ -14,9 +14,9 @@ module Spree
 #    preference :print_invoice_footer_left2, :string, :default => '+48-664-446-595'
 
 
-    preference :print_invoice_logo_path => "logo.png"
-#    preference :print_invoice_next_number => 24
-    #preference :prawn_options => {:page_layout => :portrait, :page_size => "A4", :margin => [50, 50, 50, 50]}
+#   preference :print_invoice_next_number => 24
+    preference :print_invoice_logo_path, :string, :default => 'logo.png'
+    preference :prawn_options, :hash, :default => {:page_layout => :portrait, :page_size => 'A4', :margin => [50, 50, 50, 50]}
 
 
     def use_sequential_number?
