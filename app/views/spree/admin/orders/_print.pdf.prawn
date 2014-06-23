@@ -50,7 +50,7 @@ move_down 480
 
 render :partial => "bye"
 
-move_down 660
+move_down 630
 
 # Footer
 render :partial => "footer"
