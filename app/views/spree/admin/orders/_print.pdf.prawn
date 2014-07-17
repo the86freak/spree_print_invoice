@@ -26,7 +26,8 @@ move_down 4
   move_down 2
   font @font_face, :size => 9
   text "Rechnungsdatum: #{I18n.l(@order.created_at, format:"%d.%m.%Y")}", :align => :right
-
+  font @font_face, :size => 9
+  text "Leistungsdatum: #{I18n.l(@order.shipments[0].shipped_at, format:"%d.%m.%Y")}", :align => :right
 #else
 
 #  move_down 2

@@ -5,17 +5,17 @@ if @hide_prices
   @align = { 0 => :left, 1 => :left, 2 => :right, 3 => :right }
   data << [Spree.t(:sku), "Beschreibung", "Optionen", "Anzahl"]
 else
-  @column_widths = { 0 => 30, 1 => 90, 2 => 160, 3 => 40, 4 => 100, 5 => 60 }
+  @column_widths = { 0 => 30, 1 => 90, 2 => 140, 3 => 90, 4 => 50, 5 => 80 }
   @align = { 0 => :left, 1 => :left, 2 => :left, 3 => :right, 4 => :right, 5 => :right}
-  data << [Spree.t(:sku), "Beschreibung", "Optionen", "Preis", "Anzahl", "Summe"]
+  data << [Spree.t(:sku), "Produkt", "Optionen", "Stückpreis (netto)", "Anzahl", "Positionsbetrag (netto)"]
 end
 
 @order.line_items.each do |item|
   row = [ item.variant.product.sku, item.variant.product.name]
   row << item.variant.options_text
-  row << item.single_display_amount.to_s unless @hide_prices
+  row << "€"+(item.price/1.19).round(2).to_s unless @hide_prices
   row << item.quantity
-  row << item.display_total.to_s unless @hide_prices
+  row << "€"+(item.total/1.19).round(2).to_s unless @hide_prices
   data << row
 end
 
@@ -23,20 +23,25 @@ extra_row_count = 0
 
 unless @hide_prices
   extra_row_count += 1
-  data << [""] * 5
-  data << [nil, nil, nil, nil, "Zwischensumme", @order.display_item_total.to_s]
+  #data << [""] * 4
+  data << [nil, nil, nil, {:content => "Zwischensumme (netto)", :colspan => 2}, "€"+(@order.item_total / 1.19).round(2).to_s]
 
   @order.all_adjustments.eligible.each do |adjustment|
-    extra_row_count += 1
-    data << [nil, nil, nil, nil, adjustment.label, adjustment.display_amount.to_s]
+    if adjustment.label.include? "Promotion"
+      extra_row_count += 1
+      data << [nil, nil, nil, { :content => adjustment.label, :colspan => 2}, "€"+(adjustment.amount/1.19).round(2).to_s]
+    end
   end
 
-  @order.shipments.each do |shipment|
-    extra_row_count += 1
-    data << [nil, nil, nil, nil, shipment.shipping_method.name, shipment.display_cost.to_s]
-  end
+#add Tax (Umsatzsteuer 19%)
+data << [nil, nil, nil, {:content => "USt 19%", :colspan => 2}, "€"+(@order.amount-(@order.amount/1.19)).round(2).to_s]
 
-  data << [nil, nil, nil, nil, "Summe", @order.display_total.to_s]
+#  @order.shipments.each do |shipment|
+#    extra_row_count += 1
+#    data << [nil, nil, nil, nil, shipment.shipping_method.name, shipment.display_cost.to_s]
+#  end
+
+  data << [nil, nil, nil, {:content => "Gesamtbetrag (brutto)", :colspan => 2}, @order.display_total.to_s]
 end
 
 move_down(200)
@@ -55,9 +60,11 @@ table(data, :width => 480, :column_widths => @column_widths) do
   if extra_row_count > 0
     extra_rows = row((-2-extra_row_count)..-2)
     extra_rows.columns(0..5).borders = []
+    extra_rows.column(3).font_style = :bold
     extra_rows.column(4).font_style = :bold
 
     row(-1).columns(0..5).borders = []
+    row(-1).column(3).font_style = :bold
     row(-1).column(4).font_style = :bold
   end
 end

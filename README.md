@@ -1,3 +1,12 @@
+For the Invoice-Creation:
+Copy all prawn files from
+..\app\views\spree\admin\orders\
+to 
+YOUR_STORE\app\views
+
+o/w marking a order as shipped will not work.
+
+
 SUMMARY
 =======
 
