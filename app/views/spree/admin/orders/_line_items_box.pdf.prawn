@@ -34,7 +34,8 @@ unless @hide_prices
   end
 
 #add Tax (Umsatzsteuer 19%)
-data << [nil, nil, nil, {:content => "USt 19%", :colspan => 2}, "€"+(@order.amount-(@order.amount/1.19)).round(2).to_s]
+data << [nil, nil, nil, {:content => "USt 19% auf €"+(@order.total/1.19).round(2).to_s , :colspan => 2}, "€"+(@order.total-(@order.total/1.19)).round(2).to_s]
+
 
 #  @order.shipments.each do |shipment|
 #    extra_row_count += 1

@@ -6,7 +6,7 @@
 font "Helvetica", :size => 8, :color => "#444444"
 
 data = [
-    ["VANA \n OMM Ideas UG (haftungsbeschränkt) i.G. \n Sitz: Trochtelfingerstr. 4, 70567 Stuttgart \n Amtsgericht - Registergericht Stuttgart \n Geschäftsführer: Malte Horstmann, Olaf Horstmann \n ", "http://my-vana.de \n info@my-vana.de"]
+    ["VANA \n OMM Ideas UG (haftungsbeschränkt) \n Sitz: Trochtelfingerstr. 4, 70567 Stuttgart \n Registergericht Stuttgart HRB 749562 \n Geschäftsführer: Malte Horstmann, Olaf Horstmann \n ", "http://my-vana.de \n info@my-vana.de"]
 ]
 
 table(data, :cell_style => { :border_width => 0 }, :column_widths => [300, 180] )
